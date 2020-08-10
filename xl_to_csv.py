@@ -2,8 +2,17 @@ import pandas as pd
 import numpy as np
 from datetime import timedelta
 
+# global DataFrame type. will contain shift data. can be used by iterator
+table2 = np.nan
+
 
 def convert(name, schedule):
+    """
+    converts excel file to a specific csv format. imports xlsx, exports csv
+    :param name: name of worker
+    :param schedule: excel file
+    """
+    global table2
     # shift start/end times
     t1 = '15:30'
     t2 = '16:30'
@@ -34,13 +43,14 @@ def convert(name, schedule):
                     (table1.nightPerson.str.contains(name)) |
                     (table1.eveningPerson.str.contains(name))]
 
-    # creating the google calendar format
+    # creating the google calendar format (csv)
     table2 = pd.DataFrame(columns=['Subject', 'Start Date',
                                    'Start Time', 'End Date',
                                    'End Time'])
 
     # inserting shift dates
     table2['Start Date'] = table1['date']
+    # night shift end dates are one day after start date
     table2['End Date'] = np.where(table1['nightPerson'] == name,
                                   table1['date'] + timedelta(days=1), table1['date'])
 
@@ -64,3 +74,5 @@ def convert(name, schedule):
 
     # exporting to csv
     table2.set_index('Subject').to_csv("shifts.csv", encoding='iso8859_8')
+    print("Conversion completed")
+    print("Exported to shifts.csv")
