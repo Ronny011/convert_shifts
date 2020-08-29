@@ -60,8 +60,7 @@ def import_df(subject, start_date, start_time, end_date, end_time):
             'useDefault': True,
         },
     }
-    print(event)
     # insert single event to the calendar
-    #event = service.events().insert(calendarId='primary', body=event).execute() - use only when you want to insert events
+    event = service.events().insert(calendarId='primary', body=event).execute()
     # print event URL
-    #print('Event created: %s' % (event.get('htmlLink')))- use only when you want to insert events
+    print('Event created: %s' % (event.get('htmlLink')))
