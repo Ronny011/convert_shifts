@@ -23,8 +23,8 @@ def import_df(subject, start_date, start_time, end_date, end_time):
     """
     creds = None  # credentials
     # token.pickle stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time. we need to check it's existence before using it
+    # created automatically when the authorization flow completes for the first time
+    # we need to check it's existence before using it
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
             creds = pickle.load(token)

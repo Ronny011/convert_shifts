@@ -71,14 +71,15 @@ def gui():
             sheet = filedialog.askopenfile(initialdir="/convert",
                                            title="Choose a schedule file",
                                            filetypes=(("Excel files", "*.xlsx"),
-                                                      ("all files", "*.*")))  # accept all files and excel .xlsx - redundant
+                                                      # accept all files and excel .xlsx - redundant
+                                                      ("all files", "*.*")))
             sheet = os.path.basename(sheet.name)
             print("File name: ", sheet)
             button.state(["!disabled"])  # enable convert button
         except AttributeError:
             print("error raised - didn't choose file")
 
-    # gui elements - buttons, labels...
+    # gui elements - buttons, labels, colors and alignment
     lbl_enter_name = Label(root, text="Enter name")
     lbl_enter_name.config(bg="#b7e1ff")
     lbl_enter_name.config(fg="#00a505")
